@@ -1,16 +1,61 @@
-# React + Vite
+# FinDash - Premium Finance Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A **production-grade, CRED-style fintech dashboard** built with React, Vite, Tailwind CSS, and Framer Motion. Features a stunning dark UI with neon glow effects, smooth animations, and intelligent insights.
 
-Currently, two official plugins are available:
+## ✨ Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Premium Dark UI**: Deep navy background with radial gradients and neon glow effects
+- **Smooth Animations**: Framer Motion powered micro-interactions throughout
+- **Interactive Charts**: Recharts with gradient fills, custom tooltips, and glow effects
+- **Smart Insights**: Monthly spending analysis, saving potential, and top categories
+- **Toast Notifications**: Swipe-to-dismiss with progress bars and popLayout animations
+- **Role-Based Access**: Viewer and Admin modes with permission controls
+- **Indian Fintech Focus**: INR currency formatting, realistic categories (Zomato, Swiggy, UPI)
+- **CSV Export**: Export transaction data with one click
+- **Local Storage Persistence**: Data persists across sessions
+- **Responsive Design**: Mobile-first with floating action button
 
-## React Compiler
+## 🎨 Design System
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Colors**: Neon Cyan (#00F5FF), Violet (#7C3AED), Gold (#F59E0B)
+- **Effects**: Multi-layer glow shadows, glassmorphism, backdrop blur
+- **Typography**: Clean sans-serif with gradient text effects
+- **Animations**: Spring physics, staggered entrances, layout transitions
 
-## Expanding the ESLint configuration
+## 🚀 Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **React 18** - UI Framework
+- **Vite** - Build Tool
+- **Tailwind CSS** - Styling
+- **Framer Motion** - Animations
+- **Recharts** - Data Visualization
+- **Zustand** - State Management
+- **Lucide React** - Icons
+
+## 📦 Installation
+
+```bash
+npm install
+npm run dev
+```
+
+## 🏗️ Project Structure
+
+```
+src/
+├── components/     # UI Components
+├── pages/         # Route Pages
+├── hooks/         # Custom React Hooks
+├── utils/         # Utility Functions
+├── constants/     # Configuration
+├── store/         # Zustand Store
+└── data/          # Mock Data
+```
+
+## 📝 License
+
+MIT License - Feel free to use for personal or commercial projects.
+
+---
+
+**Built with ❤️ by Himanshi Sharma**
