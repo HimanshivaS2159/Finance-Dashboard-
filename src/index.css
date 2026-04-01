@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-bg: 248 250 252;
+    --color-surface: 255 255 255;
+    --color-primary: 14 165 233; /* Light Blue / Sky 500 */
+    --color-secondary: 249 115 22; /* Orange 500 */
+    --color-accent: 251 146 60; /* Orange 400 */
+    --color-text: 15 23 42;
+    --color-text-muted: 71 85 105;
+  }
+
+  .dark {
+    --color-bg: 10 15 36; /* Navy */
+    --color-surface: 17 24 39; /* Dark Navy / Gray 900 */
+    --color-primary: 56 189 248; /* Light Blue / Sky 400 */
+    --color-secondary: 251 146 60; /* Orange 400 */
+    --color-accent: 253 186 116; /* Orange 300 */
+    --color-text: 248 250 252;
+    --color-text-muted: 148 163 184;
+  }
+
+  body {
+    @apply bg-background text-text transition-colors duration-300 antialiased;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    @apply bg-surface/70 backdrop-blur-md border border-white/10 shadow-xl rounded-2xl;
+  }
+}

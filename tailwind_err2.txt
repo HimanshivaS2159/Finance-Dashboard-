@@ -1,0 +1,251 @@
+﻿node.exe : 
+At line:1 char:1
++ & "C:\Program 
+Files\nodejs/node.exe" 
+"C:\Program 
+Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~
+    + CategoryInfo         
+     : NotSpecified: (:St  
+  ring) [], RemoteExcept   
+ ion
+    + FullyQualifiedErrorI 
+   d : NativeCommandError
+ 
+Rebuilding...
+CssSyntaxError: 
+tailwindcss: C:\Users\hp\De
+sktop\Finance Dasboard\src\
+index.css:33:5: The 
+`bg-surface/70` class does 
+not exist. If 
+`bg-surface/70` is a 
+custom class, make sure it 
+is defined within a 
+`@layer` directive.
+    at Input.error (C:\User
+s\hp\Desktop\Finance Dasboa
+rd\node_modules\postcss\lib
+\input.js:135:16)
+    at AtRule.error (C:\Use
+rs\hp\Desktop\Finance Dasbo
+ard\node_modules\postcss\li
+b\node.js:146:32)
+    at processApply (C:\Use
+rs\hp\Desktop\Finance Dasbo
+ard\node_modules\tailwindcs
+s\lib\lib\expandApplyAtRule
+s.js:380:29)
+    at C:\Users\hp\Desktop\
+Finance Dasboard\node_modul
+es\tailwindcss\lib\lib\expa
+ndApplyAtRules.js:551:9
+    at C:\Users\hp\Desktop\
+Finance Dasboard\node_modul
+es\tailwindcss\lib\processT
+ailwindFeatures.js:55:50
+    at async Object.Once (C
+:\Users\hp\Desktop\Finance 
+Dasboard\node_modules\tailw
+indcss\lib\cli\build\plugin
+.js:248:17)
+    at async 
+LazyResult.runAsync (C:\Use
+rs\hp\Desktop\Finance Dasbo
+ard\node_modules\postcss\li
+b\lazy-result.js:293:11)
+    at async build (C:\User
+s\hp\Desktop\Finance Dasboa
+rd\node_modules\tailwindcss
+\lib\cli\build\index.js:49:
+9) {
+  reason: 'The 
+`bg-surface/70` class does 
+not exist. If 
+`bg-surface/70` is a 
+custom class, make sure it 
+is defined within a 
+`@layer` directive.',
+  file: 'C:\\Users\\hp\\Des
+ktop\\Finance 
+Dasboard\\src\\index.css',
+  source: '@tailwind 
+base;\n' +
+    '@tailwind 
+components;\n' +
+    '@tailwind 
+utilities;\n' +
+    '\n' +
+    '@layer base {\n' +
+    '  :root {\n' +
+    '    --color-bg: 
+#f3f4f6; /* Gray 100 */\n' 
++
+    '    --color-surface: 
+#ffffff;\n' +
+    '    --color-primary: 
+#3b82f6; /* Blue 500 */\n' 
++
+    '    
+--color-secondary: 
+#8b5cf6; /* Violet 500 
+*/\n' +
+    '    --color-accent: 
+#10b981; /* Emerald 500 
+*/\n' +
+    '    --color-text: 
+#1f2937; /* Gray 800 */\n' 
++
+    '    
+--color-text-muted: 
+#6b7280; /* Gray 500 */\n' 
++
+    '  }\n' +
+    '\n' +
+    '  .dark {\n' +
+    '    --color-bg: 
+#0f172a; /* Slate 900 
+*/\n' +
+    '    --color-surface: 
+#1e293b; /* Slate 800 
+*/\n' +
+    '    --color-primary: 
+#60a5fa; /* Blue 400 */\n' 
++
+    '    
+--color-secondary: 
+#a78bfa; /* Violet 400 
+*/\n' +
+    '    --color-accent: 
+#34d399; /* Emerald 400 
+*/\n' +
+    '    --color-text: 
+#f8fafc; /* Slate 50 */\n' 
++
+    '    
+--color-text-muted: 
+#94a3b8; /* Slate 400 
+*/\n' +
+    '  }\n' +
+    '\n' +
+    '  body {\n' +
+    '    @apply 
+bg-background text-text 
+transition-colors 
+duration-300 
+antialiased;\n' +
+    '  }\n' +
+    '}\n' +
+    '\n' +
+    '@layer components 
+{\n' +
+    '  .glass-panel {\n' +
+    '    @apply 
+bg-surface/70 
+backdrop-blur-md border 
+border-white/10 shadow-xl 
+rounded-2xl;\n' +
+    '  }\n' +
+    '}\n',
+  line: 33,
+  column: 5,
+  endLine: 33,
+  endColumn: 88,
+  input: {
+    column: 5,
+    endColumn: 88,
+    endLine: 33,
+    endOffset: 943,
+    line: 33,
+    offset: 860,
+    source: '@tailwind 
+base;\n' +
+      '@tailwind 
+components;\n' +
+      '@tailwind 
+utilities;\n' +
+      '\n' +
+      '@layer base {\n' +
+      '  :root {\n' +
+      '    --color-bg: 
+#f3f4f6; /* Gray 100 */\n' 
++
+      '    
+--color-surface: 
+#ffffff;\n' +
+      '    
+--color-primary: #3b82f6; 
+/* Blue 500 */\n' +
+      '    
+--color-secondary: 
+#8b5cf6; /* Violet 500 
+*/\n' +
+      '    --color-accent: 
+#10b981; /* Emerald 500 
+*/\n' +
+      '    --color-text: 
+#1f2937; /* Gray 800 */\n' 
++
+      '    
+--color-text-muted: 
+#6b7280; /* Gray 500 */\n' 
++
+      '  }\n' +
+      '\n' +
+      '  .dark {\n' +
+      '    --color-bg: 
+#0f172a; /* Slate 900 
+*/\n' +
+      '    
+--color-surface: #1e293b; 
+/* Slate 800 */\n' +
+      '    
+--color-primary: #60a5fa; 
+/* Blue 400 */\n' +
+      '    
+--color-secondary: 
+#a78bfa; /* Violet 400 
+*/\n' +
+      '    --color-accent: 
+#34d399; /* Emerald 400 
+*/\n' +
+      '    --color-text: 
+#f8fafc; /* Slate 50 */\n' 
++
+      '    
+--color-text-muted: 
+#94a3b8; /* Slate 400 
+*/\n' +
+      '  }\n' +
+      '\n' +
+      '  body {\n' +
+      '    @apply 
+bg-background text-text 
+transition-colors 
+duration-300 
+antialiased;\n' +
+      '  }\n' +
+      '}\n' +
+      '\n' +
+      '@layer components 
+{\n' +
+      '  .glass-panel {\n' 
++
+      '    @apply 
+bg-surface/70 
+backdrop-blur-md border 
+border-white/10 shadow-xl 
+rounded-2xl;\n' +
+      '  }\n' +
+      '}\n',
+    url: 'file:///C:/Users/
+hp/Desktop/Finance%20Dasboa
+rd/src/index.css',
+    file: 'C:\\Users\\hp\\D
+esktop\\Finance 
+Dasboard\\src\\index.css'
+  },
+  plugin: 'tailwindcss'
+}
