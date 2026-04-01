@@ -140,15 +140,15 @@ const TransactionModal = ({ isOpen, onClose, transaction }) => {
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm text-text-muted mb-1 font-medium">Amount ($)</label>
+              <label className="block text-sm text-text-muted mb-1 font-medium">Amount (₹)</label>
               <input
                 type="number"
-                step="0.01"
+                step="1"
                 min="0"
                 value={formData.amount}
                 onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
-                className={`w-full bg-background/50 border ${errors.amount ? 'border-red-500/50' : 'border-white/10'} rounded-xl px-4 py-2.5 text-text focus:outline-none focus:border-primary/50 transition-colors placeholder:text-text-muted/50`}
-                placeholder="0.00"
+                className={`w-full bg-background/50 border ${errors.amount ? 'border-red-500/50' : 'border-white/10'} rounded-xl px-4 py-2.5 text-text focus:outline-none focus:border-primary focus:shadow-neon-cyan transition-all placeholder:text-text-muted/50`}
+                placeholder="0"
               />
               {errors.amount && <p className="text-xs text-red-400 mt-1">{errors.amount}</p>}
             </div>

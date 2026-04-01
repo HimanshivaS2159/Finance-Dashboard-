@@ -10,8 +10,8 @@ const RoleToggle = () => {
         onClick={() => setRole('Viewer')}
         className={`px-3 py-1 text-sm font-medium rounded-md transition-all duration-300 ${
           role === 'Viewer'
-            ? 'bg-sky-500/20 text-sky-400 shadow-sm'
-            : 'text-text-muted hover:text-text'
+            ? 'bg-[#00F5FF]/10 text-[#00F5FF] shadow-neon-cyan border border-[#00F5FF]/50'
+            : 'text-text-muted hover:text-[#00F5FF]'
         }`}
       >
         Viewer
@@ -20,8 +20,8 @@ const RoleToggle = () => {
         onClick={() => setRole('Admin')}
         className={`px-3 py-1 text-sm font-medium rounded-md transition-all duration-300 ${
           role === 'Admin'
-            ? 'bg-orange-500/20 text-orange-400 shadow-sm'
-            : 'text-text-muted hover:text-text'
+            ? 'bg-[#7C3AED]/20 text-[#c4b5fd] shadow-neon-violet border border-[#7C3AED]/50'
+            : 'text-text-muted hover:text-[#7C3AED]'
         }`}
       >
         Admin

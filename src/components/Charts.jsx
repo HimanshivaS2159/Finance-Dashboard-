@@ -1,17 +1,20 @@
 import React from 'react';
-import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, Tooltip as RechartsTooltip, CartesianGrid, PieChart, Pie, Cell, Legend } from 'recharts';
+import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, Tooltip, CartesianGrid, PieChart, Pie, Cell, Legend } from 'recharts';
 import { motion } from 'framer-motion';
 import useStore from '../store/useStore';
+
+const COLORS = ['#00F5FF', '#7C3AED', '#F59E0B', '#22C55E', '#EF4444'];
 
 const Charts = () => {
   const { transactions } = useStore();
 
-  // Prepare data for line chart (Balance over time)
-  // Sort by date ascending
+  const formatCurrency = (value) =>
+    new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumSignificantDigits: 3 }).format(value);
+
   const sortedTx = [...transactions].sort((a, b) => new Date(a.date) - new Date(b.date));
   
   let currentBalance = 0;
-  const areaData = sortedTx.map(tx => {
+  const chartData = sortedTx.map(tx => {
     currentBalance += tx.amount;
     return {
       date: new Date(tx.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
@@ -19,7 +22,6 @@ const Charts = () => {
     };
   });
 
-  // Prepare data for pie chart (Expense breakdown)
   const expenses = transactions.filter(t => t.type === 'Expense');
   const expenseByCategory = expenses.reduce((acc, curr) => {
     acc[curr.category] = (acc[curr.category] || 0) + Math.abs(curr.amount);
@@ -31,46 +33,50 @@ const Charts = () => {
     value: expenseByCategory[key],
   }));
 
-  const COLORS = ['#3b82f6', '#8b5cf6', '#10b981', '#f59e0b', '#ef4444'];
-
-  const CustomTooltip = ({ active, payload, label }) => {
-    if (active && payload && payload.length) {
-      return (
-        <div className="glass-panel p-3 border-white/10 !bg-surface/90">
-          <p className="text-text-muted text-xs mb-1">{label}</p>
-          <p className="font-bold text-primary">
-            ${payload[0].value.toLocaleString()}
-          </p>
-        </div>
-      );
-    }
-    return null;
-  };
-
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
       {/* Balance Area Chart */}
       <motion.div 
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
-        className="glass-panel lg:col-span-2 p-6"
+        className="glass-panel p-6 lg:col-span-2 group hover:shadow-neon-cyan transition-shadow duration-500"
       >
-        <h3 className="text-lg font-semibold text-text mb-6">Balance Overview</h3>
+        <h3 className="text-lg font-bold text-text mb-6">Balance Overview</h3>
         <div className="h-[300px] w-full">
           <ResponsiveContainer width="100%" height="100%">
-            <AreaChart data={areaData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+            <AreaChart data={chartData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
               <defs>
                 <linearGradient id="colorBalance" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.3}/>
-                  <stop offset="95%" stopColor="#3b82f6" stopOpacity={0}/>
+                  <stop offset="5%" stopColor="#00F5FF" stopOpacity={0.8}/>
+                  <stop offset="95%" stopColor="#00F5FF" stopOpacity={0}/>
                 </linearGradient>
+                <filter id="neonGlow" height="300%" width="300%" x="-75%" y="-75%">
+                  <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+                  <feMerge>
+                    <feMergeNode in="coloredBlur"/>
+                    <feMergeNode in="SourceGraphic"/>
+                  </feMerge>
+                </filter>
               </defs>
-              <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(255,255,255,0.05)" />
-              <XAxis dataKey="date" axisLine={false} tickLine={false} tick={{ fill: '#6b7280', fontSize: 12 }} dy={10} />
-              <YAxis axisLine={false} tickLine={false} tick={{ fill: '#6b7280', fontSize: 12 }} />
-              <RechartsTooltip content={<CustomTooltip />} />
-              <Area type="monotone" dataKey="balance" stroke="#3b82f6" strokeWidth={3} fillOpacity={1} fill="url(#colorBalance)" />
+              <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" vertical={false} />
+              <XAxis dataKey="date" stroke="rgba(255,255,255,0.4)" fontSize={12} tickLine={false} axisLine={false} dy={10} />
+              <YAxis stroke="rgba(255,255,255,0.4)" fontSize={12} tickFormatter={(val) => `₹${val/1000}k`} tickLine={false} axisLine={false} dx={-10} />
+              <Tooltip
+                contentStyle={{ backgroundColor: 'rgb(5 8 22 / 0.9)', borderColor: 'rgba(0, 245, 255, 0.3)', borderRadius: '12px', boxShadow: '0 0 15px rgba(0, 245, 255, 0.2)' }}
+                itemStyle={{ color: '#00F5FF', fontWeight: 'bold' }}
+                labelStyle={{ color: '#94a3b8' }}
+                formatter={(value) => [formatCurrency(value), 'Balance']}
+              />
+              <Area 
+                type="monotone" 
+                dataKey="balance" 
+                stroke="#00F5FF" 
+                strokeWidth={3} 
+                fillOpacity={1} 
+                fill="url(#colorBalance)" 
+                filter="url(#neonGlow)"
+              />
             </AreaChart>
           </ResponsiveContainer>
         </div>
@@ -78,34 +84,40 @@ const Charts = () => {
 
       {/* Expense Breakdown Pie Chart */}
       <motion.div 
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.4, delay: 0.1 }}
-        className="glass-panel p-6 flex flex-col"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, delay: 0.2 }}
+        className="glass-panel p-6 group hover:shadow-neon-violet transition-shadow duration-500"
       >
-        <h3 className="text-lg font-semibold text-text mb-2">Expense Breakdown</h3>
-        <div className="flex-1 min-h-[300px] w-full relative flex items-center justify-center">
+        <h3 className="text-lg font-bold text-text mb-6">Expenses Breakdown</h3>
+        <div className="h-[300px] w-full relative">
           {pieData.length > 0 ? (
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
+                <Tooltip
+                  contentStyle={{ backgroundColor: 'rgb(5 8 22 / 0.9)', borderColor: 'rgba(124, 58, 237, 0.3)', borderRadius: '12px', boxShadow: '0 0 15px rgba(124, 58, 237, 0.2)' }}
+                  itemStyle={{ fontWeight: 'bold' }}
+                  formatter={(value) => formatCurrency(value)}
+                />
                 <Pie
                   data={pieData}
                   cx="50%"
                   cy="50%"
-                  innerRadius={60}
+                  innerRadius={70}
                   outerRadius={100}
                   paddingAngle={5}
                   dataKey="value"
-                  stroke="none"
+                  stroke="rgba(0,0,0,0.2)"
+                  strokeWidth={2}
                 >
                   {pieData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                    <Cell 
+                      key={`cell-${index}`} 
+                      fill={COLORS[index % COLORS.length]} 
+                      className="hover:opacity-80 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.5)] transition-all outline-none"
+                    />
                   ))}
                 </Pie>
-                <RechartsTooltip 
-                  contentStyle={{ backgroundColor: 'rgba(30, 41, 59, 0.9)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px' }}
-                  itemStyle={{ color: '#fff' }}
-                />
                 <Legend verticalAlign="bottom" height={36} iconType="circle" wrapperStyle={{ fontSize: '12px', color: '#94a3b8' }}/>
               </PieChart>
             </ResponsiveContainer>

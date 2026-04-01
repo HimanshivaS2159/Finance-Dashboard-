@@ -81,47 +81,48 @@ const TransactionTable = () => {
           <tbody>
             <AnimatePresence>
               {sortedTx.length > 0 ? (
-                sortedTx.map((tx) => (
+                sortedTx.map((tx, index) => (
                   <motion.tr
                     key={tx.id}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    transition={{ duration: 0.2 }}
-                    className="border-b border-white/5 hover:bg-white/5 transition-colors group"
+                    layout
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: 20, scale: 0.95 }}
+                    transition={{ duration: 0.25, delay: index * 0.05 }}
+                    className="border-b border-white/5 hover:bg-white/5 hover:shadow-lg transition-all duration-200 group relative"
                   >
                     <td className="p-4 text-sm font-medium text-text-muted">
                       {new Date(tx.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                     </td>
                     <td className="p-4">
                       <div className="flex items-center">
-                        <div className={`p-2 rounded-lg mr-3 shadow-md ${tx.type === 'Income' ? 'bg-green-500/10 text-green-400' : 'bg-red-500/10 text-red-400'}`}>
+                        <div className={`p-2 rounded-xl mr-3 shadow-lg ${tx.type === 'Income' ? 'bg-green-500/20 text-green-400 drop-shadow-[0_0_8px_rgba(34,197,94,0.6)]' : 'bg-red-500/20 text-red-500 drop-shadow-[0_0_8px_rgba(239,68,68,0.6)]'}`}>
                           {tx.type === 'Income' ? <ArrowUpRight size={16} /> : <ArrowDownRight size={16} />}
                         </div>
-                        <span className="text-sm font-medium text-text">{tx.description}</span>
+                        <span className="text-sm font-semibold text-text group-hover:text-primary transition-colors">{tx.description}</span>
                       </div>
                     </td>
                     <td className="p-4">
-                      <span className="px-3 py-1 bg-surface rounded-full text-xs font-medium text-text-muted border border-white/5 shadow-sm">
+                      <span className="px-3 py-1 bg-surface rounded-full text-xs font-semibold text-text border border-white/10 shadow-sm shadow-black/50">
                         {tx.category}
                       </span>
                     </td>
-                    <td className={`p-4 text-sm font-bold text-right ${tx.type === 'Income' ? 'text-green-400' : 'text-text'}`}>
+                    <td className={`p-4 text-sm font-bold text-right tracking-wide ${tx.type === 'Income' ? 'text-green-400' : 'text-text'}`}>
                       {tx.type === 'Income' ? '+' : ''}
-                      {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(tx.amount)}
+                      {new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(tx.amount)}
                     </td>
                     {role === 'Admin' && (
                       <td className="p-4 text-right opacity-0 group-hover:opacity-100 transition-opacity">
                         <div className="flex gap-2 justify-end">
                           <button
                             onClick={() => openModal(tx)}
-                            className="p-1.5 text-blue-400 hover:bg-blue-400/20 rounded shadow-sm transition-colors"
+                            className="p-2 text-primary hover:bg-primary/20 hover:shadow-neon-cyan rounded-lg transition-all"
                           >
                             <Edit2 size={16} />
                           </button>
                           <button
                             onClick={() => deleteTransaction(tx.id)}
-                            className="p-1.5 text-red-400 hover:bg-red-400/20 rounded shadow-sm transition-colors"
+                            className="p-2 text-red-400 hover:bg-red-500/20 hover:drop-shadow-[0_0_8px_rgba(239,68,68,0.8)] rounded-lg transition-all"
                           >
                             <Trash2 size={16} />
                           </button>
