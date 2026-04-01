@@ -18,17 +18,35 @@ const useStore = create(
         sortOrder: 'desc', // 'desc' or 'asc'
       },
 
-      addTransaction: (tx) => set((state) => ({
-        transactions: [{ ...tx, id: crypto.randomUUID(), type: tx.amount < 0 ? 'Expense' : 'Income' }, ...state.transactions]
-      })),
+      addTransaction: (tx) => {
+        set((state) => ({
+          transactions: [{ ...tx, id: crypto.randomUUID(), type: tx.amount < 0 ? 'Expense' : 'Income' }, ...state.transactions]
+        }));
+        // Show success toast
+        if (window.showToast) {
+          window.showToast('Transaction added successfully!', 'success');
+        }
+      },
       
-      deleteTransaction: (id) => set((state) => ({
-        transactions: state.transactions.filter(t => t.id !== id)
-      })),
+      deleteTransaction: (id) => {
+        set((state) => ({
+          transactions: state.transactions.filter(t => t.id !== id)
+        }));
+        // Show success toast
+        if (window.showToast) {
+          window.showToast('Transaction deleted successfully!', 'success');
+        }
+      },
       
-      updateTransaction: (id, updatedTx) => set((state) => ({
-        transactions: state.transactions.map(t => t.id === id ? { ...t, ...updatedTx, type: updatedTx.amount < 0 ? 'Expense' : 'Income' } : t)
-      })),
+      updateTransaction: (id, updatedTx) => {
+        set((state) => ({
+          transactions: state.transactions.map(t => t.id === id ? { ...t, ...updatedTx, type: updatedTx.amount < 0 ? 'Expense' : 'Income' } : t)
+        }));
+        // Show success toast
+        if (window.showToast) {
+          window.showToast('Transaction updated successfully!', 'success');
+        }
+      },
 
       setRole: (role) => set({ role }),
       setCurrentTab: (tab) => set({ currentTab: tab }),
