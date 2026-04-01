@@ -5,6 +5,7 @@ import Dashboard from './pages/Dashboard';
 import Filters from './components/Filters';
 import TransactionTable from './components/TransactionTable';
 import Insights from './components/Insights';
+import ToastContainer from './components/Toast';
 import { motion, AnimatePresence } from 'framer-motion';
 import useStore from './store/useStore';
 
@@ -22,8 +23,8 @@ function App() {
   return (
     <div className="flex h-screen w-full bg-background overflow-hidden selection:bg-primary/30 text-text">
       {/* Ambient glow effects behind the layout */}
-      <div className="fixed top-[-10%] left-[-10%] w-[40%] h-[40%] bg-sky-500/10 rounded-full blur-[120px] pointer-events-none"></div>
-      <div className="fixed bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-orange-500/10 rounded-full blur-[120px] pointer-events-none"></div>
+      <div className="fixed top-[-10%] left-[-10%] w-[40%] h-[40%] bg-[#00F5FF]/10 rounded-full blur-[120px] pointer-events-none"></div>
+      <div className="fixed bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-[#7C3AED]/10 rounded-full blur-[120px] pointer-events-none"></div>
 
       {loading ? (
         <div className="w-full flex items-center justify-center h-full z-50 bg-background absolute inset-0">
@@ -75,8 +76,11 @@ function App() {
           </motion.div>
         </AnimatePresence>
       )}
+      
+      {/* Toast Notifications */}
+      <ToastContainer />
     </div>
   );
-}
+};
 
 export default App;
