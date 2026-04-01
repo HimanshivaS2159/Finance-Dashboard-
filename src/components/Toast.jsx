@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { motion, AnimatePresence, PanInfo } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { CheckCircle, AlertCircle, X, Info, Bell } from 'lucide-react';
 
 const Toast = ({ id, message, type, onClose, duration = 4000 }) => {
